@@ -1,5 +1,6 @@
 package com.Bridgelabz;
 
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -7,13 +8,14 @@ public class AddressBook {
 
 	Scanner input=new Scanner(System.in);
 		
-		Contact array[]=new Contact[10] ;
+		Contact array[]=new Contact[15] ;
 		int indexCount=0;
 		
 		void pushData(Contact contactobj)
 		{
 			this.array[indexCount]=contactobj;
 			indexCount++;
+			
 		}
 
 		void dynamicMathod(){
@@ -22,7 +24,7 @@ public class AddressBook {
 			do
 			{
 				System.out.println("Enter the option you want to choose: ");
-				System.out.println(" 1.Add Contact \n 2.Edit Contact \n 3.Exit");
+				System.out.println(" 1.Add Contact \n 2.Edit Contact \n 3.Delete Contact \n 4.Exit");
 				int option=input.nextInt();
 				
 				switch(option)
@@ -34,12 +36,17 @@ public class AddressBook {
 					editContact();
 					break;
 				case 3:
+					deleteContact();
+					System.out.println(Arrays.toString(array));
+					break;
+				case 4:
 					waitTillSomeOneExit=false;
 					System.out.println("Exit");
 				}
 			}
 			while(waitTillSomeOneExit);
 		}
+		
 		void addContact(){
 			
 			System.out.println("Enter First Name: ");
@@ -68,6 +75,7 @@ public class AddressBook {
 			
 			Contact person=new Contact(firstName,lastName,address,city,state,email,zipCode,pNumber);
 			pushData(person);
+			
 		}
 		
 		void editContact(){
@@ -80,7 +88,7 @@ public class AddressBook {
 			{
 			 if(contact==null)
 			  {
-					
+				 
 			   }
 			 else
 			  {
@@ -94,60 +102,94 @@ public class AddressBook {
 					
 					switch(choice)
 					{
-					case 1:
-				        System.out.println("Enter correct First name: ");
-				        String firstName=input.next();
-				        contact.setFirstName(firstName);
-				        break;
-				  case 2:
-				        System.out.println("Enter correct last name: ");
-				        String lastName=input.next();
-				        contact.setLastName(lastName);
-				        break;
-				  case 3:
-					     System.out.println("Enter correct address: ");
-					     String address=input.next();
-					     contact.setAddress(address);
-					     break;
-				  case 4:
-					     System.out.println("Enter correct city: ");
-					     String city=input.next();
-					     contact.setCity(city);
-					     break;
-				  case 5:
-					     System.out.println("Enter correct state: ");
-					     String state=input.next();
-					     contact.setState(state);
-					     break;
-				  case 6:
-					     System.out.println("Enter correct email: ");
-					     String email=input.next();
-					     contact.setEmail(email);
-					     break;
-				  case 7:
-					     System.out.println("Enter correct zip code: ");
-					     int zipCode=input.nextInt();
-					     contact.setZipCode(zipCode);
-					     break;
-				  case 8:
-					  System.out.println("Enter correct phone number: ");
-					  long pNumber=input.nextLong();
-					  contact.setpNumber(pNumber);
-					  break;
-					    
+					 case 1:
+					        System.out.println("Enter correct First name: ");
+					        String firstName=input.next();
+					        contact.setFirstName(firstName);
+					        break;
+					  case 2:
+					        System.out.println("Enter correct last name: ");
+					        String lastName=input.next();
+					        contact.setLastName(lastName);
+					        break;
+					  case 3:
+						     System.out.println("Enter correct address: ");
+						     String address=input.next();
+						     contact.setAddress(address);
+						     break;
+					  case 4:
+						     System.out.println("Enter correct city: ");
+						     String city=input.next();
+						     contact.setCity(city);
+						     break;
+					  case 5:
+						     System.out.println("Enter correct state: ");
+						     String state=input.next();
+						     contact.setState(state);
+						     break;
+					  case 6:
+						     System.out.println("Enter correct email: ");
+						     String email=input.next();
+						     contact.setEmail(email);
+						     break;
+					  case 7:
+						     System.out.println("Enter correct zip code: ");
+						     int zipCode=input.nextInt();
+						     contact.setZipCode(zipCode);
+						     break;
+					  case 8:
+						  System.out.println("Enter correct phone number: ");
+						  long pNumber=input.nextLong();
+						  contact.setpNumber(pNumber);
+						  break;
+						    
 					 }
 					System.out.println(contact);
 				   }
 				    
-				 else
-				    {
-					System.out.println("Contact not exist");
-				    }
-				
 			  }
 			}
 			
 		}
+		
+		
+		void deleteContact() {
+			
+			System.out.println("Enter the First Name to Delete: ");
+			String nameToDelete = input.next();
+			
+			for(Contact contact:array)
+		   {
+		 	
+				if(contact == null)
+				{
+					
+				}
+				  else 
+		           {
+					if (nameToDelete.equals(contact.getFirstName()))
+					{
+						System.out.println("Contact Found **" + nameToDelete);
+						
+						contact.setFirstName(null);
+						contact.setLastName(null);
+						contact.setAddress(null);
+						contact.setCity(null);
+						contact.setState(null);
+						contact.setEmail(null);
+						contact.setZipCode(0);
+						contact.setpNumber(0);
+						
+						
+						System.out.println("contact is deleted successfully");
+						 
+						System.out.println(contact);
+						
+		              }
+		       }
+		   }	
+	}	
+		
 		
 		@Override
 		public String toString() {
